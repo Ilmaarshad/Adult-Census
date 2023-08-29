@@ -3,8 +3,6 @@ import sys
 import pickle
 import numpy as np 
 import pandas as pd
-from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
-
 from sourcee.exception import CustomException
 from sourcee.logger import logging
 from sklearn.model_selection import GridSearchCV
@@ -33,11 +31,10 @@ def evaluate_models(X_train, y_train,X_test,y_test,models,param):
             para = param[list(models.keys())[i]]
 
             #Model Traning
-            gs = GridSearchCV(model,para,cv=5)
+            gs = GridSearchCV(estimator=model,param_grid=para,cv=5)
             gs.fit(X_train,y_train)
-
-            model.set_params(**gs.best_params_)
-            model.fit(X_train,y_train)
+            model(**gs.best_params_).fit(X_train,y_train)
+            #model.fit(X_train,y_train)
 
             #make Prediction
             y_test_pred = model.predict(X_test)

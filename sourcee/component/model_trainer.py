@@ -29,8 +29,13 @@ class ModelTraining:
                 test_arr[:,:-1],
                 test_arr[:,-1]
                 )
+            logging.info(X_train.dtype)
+            print(X_test.dtype)
+            print(y_train.dtype)
+            print(y_test.dtype)
+
             
-            logging.info('model training strted')
+            logging.info('model training started')
             models = {
                 "Random Forest": RandomForestClassifier(),
                 "Decision Tree": DecisionTreeClassifier(),
@@ -55,7 +60,7 @@ class ModelTraining:
                 "Logistic":{
                     "class_weight":["balanced"],
                     'penalty': ['l1', 'l2'],
-                    'C': [0.001, 0.01, 0.1, 1, 10, 100],
+                    #'C': [0.001, 0.01, 0.1, 1, 10, 100],
                     'solver': ['liblinear', 'saga']
                 }
             }

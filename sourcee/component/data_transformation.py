@@ -90,12 +90,16 @@ class DataTransformation:
             train_arr = np.c_[train_feature_arr, np.array(target_train_df)]
             test_arr = np.c_[test_feature_arr, np.array(target_test_df)]
 
+            logging.info(f'Data type : {type(train_arr)}')
+
+
             save_object(
                 file_path = self.data_transformation_config.pickle_path,
                 obj=preprocesser_obj
 
             )
             logging.info('pickle file saved')
+            
 
             return(
                 train_arr,
